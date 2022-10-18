@@ -1,8 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+WebsiteProjectCMart.Startup.Initialize();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -8,9 +8,9 @@ namespace DataLibrary.Repository
 {
 	public class AccountRepository
 	{
-		public AccountDTO VerifyAccount(AccountDTO accDTO, string constring)
+		public AccountDTO VerifyAccount(AccountDTO accDTO, string connectionString)
 		{
-			DataAccess dal = new DataAccess(constring);
+			DataAccess dal = new DataAccess(connectionString);
 			Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
 			paramDictionary.Add("Username", accDTO.Username);
 			paramDictionary.Add("Password", accDTO.Password);
