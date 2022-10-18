@@ -10,8 +10,12 @@ namespace WebsiteProjectCMart.BusinessLogic
 	{
 		public AccountViewModel VerifyAccount(AccountViewModel avm)
 		{
-			AccountRepository accountRepository = new AccountRepository();
-            AccountDTO accountDTO = accountRepository.VerifyAccount(ConvertAccVMToAccDTO(avm));
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            IConfiguration configuration = builder.Build();
+            string constring = configuration.GetValue<string>("ConnectionStrings:Default");
+
+            AccountRepository accountRepository = new AccountRepository();
+            AccountDTO accountDTO = accountRepository.VerifyAccount(ConvertAccVMToAccDTO(avm), constring);
 			AccountViewModel accountVM = new AccountViewModel();
             if (accountDTO.Username == avm.Username && accountDTO.Password == avm.Password)
 			{
@@ -30,7 +34,9 @@ namespace WebsiteProjectCMart.BusinessLogic
 			AccountViewModel accountVM = new AccountViewModel();
             accountVM.Username = accountDTO.Username;
             accountVM.Password = accountDTO.Password;
-			return accountVM;
+			Console.WriteLine(accountVM.Username);
+            Console.WriteLine(accountVM.Password);
+            return accountVM;
 		}
 		public AccountDTO ConvertAccVMToAccDTO(AccountViewModel avm)
 		{

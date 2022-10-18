@@ -8,10 +8,9 @@ namespace DataLibrary.Repository
 {
 	public class AccountRepository
 	{
-		private IConfiguration configuration;
-		public AccountDTO VerifyAccount(AccountDTO accDTO)
-		{			
-			DataAccess dal = new DataAccess(configuration.GetConnectionString("DefaultConnection"));
+		public AccountDTO VerifyAccount(AccountDTO accDTO, string constring)
+		{
+			DataAccess dal = new DataAccess(constring);
 			Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
 			paramDictionary.Add("Username", accDTO.Username);
 			paramDictionary.Add("Password", accDTO.Password);
