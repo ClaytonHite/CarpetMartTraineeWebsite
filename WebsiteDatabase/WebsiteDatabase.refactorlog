@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="b3359a3c-461c-47a0-98cd-76a61b38ff84" ChangeDateTime="10/18/2022 13:36:48">
+    <Property Name="ElementName" Value="[dbo].[Users].[ZIP]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Zip" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="02e01312-9733-4b27-925e-677813725d03" ChangeDateTime="10/18/2022 13:40:59">
+    <Property Name="ElementName" Value="[dbo].[ClassSchedule].[ClassDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ClassSchedule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClassStartDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b99d1622-9817-44f5-ae4f-a0fe53ff7322" ChangeDateTime="10/18/2022 13:43:56">
+    <Property Name="ElementName" Value="[dbo].[ClassSchedule].[Host]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ClassSchedule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClassHost" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f6b8b89e-75b5-4d8f-85cd-8b4b975f26d9" ChangeDateTime="10/18/2022 13:45:48">
+    <Property Name="ElementName" Value="[dbo].[FK_Users_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Users_ToUserAccounts]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3ee656fa-289b-42b5-b087-6a9269f5dfbe" ChangeDateTime="10/18/2022 13:46:58">
+    <Property Name="ElementName" Value="[dbo].[FK_Users_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Users_ToUserAccounts]" />
+  </Operation>
+</Operations>
