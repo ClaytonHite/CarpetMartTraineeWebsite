@@ -35,3 +35,16 @@
 		</div>
 	</form>
 </div>
+@{
+    if(Model != null)
+    {
+        if(Model.EntrySuccessfull)
+        {
+            <h2>You have logged in.</h2>
+        }
+        else
+        {
+            <h2>Invalid account username/password.</h2>
+        }
+    }
+}
