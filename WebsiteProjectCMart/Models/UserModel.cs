@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataLibrary.DTOs
+﻿namespace WebsiteProjectCMart.Models
 {
-    public class UserDTO
+    public class UserModel
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

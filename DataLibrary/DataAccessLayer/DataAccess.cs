@@ -18,6 +18,41 @@ namespace DataLibrary.DataAccessLayer
         {
             throw new NotImplementedException();
         }
+        public DataTable VerifyAccountViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(storedProcName, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    foreach (var parameter in parameters)
+                    {
+                        command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                    }
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        da.Fill(dataTable);
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
+                throw;
+            }
+            return dataTable;
+        }
         public List<T> ReadDataViaStoredProcedure<T>(string storedProcName, Dictionary<string, object> parameters)
         {
             List<T> dataList = new List<T>();

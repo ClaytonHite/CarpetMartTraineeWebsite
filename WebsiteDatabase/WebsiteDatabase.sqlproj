@@ -61,6 +61,7 @@
     <Build Include="UserAccounts.sql" />
     <Build Include="Users.sql" />
     <Build Include="ClassSchedule.sql" />
+    <Build Include="spVerifyAccount.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="WebsiteDatabase.refactorlog" />
