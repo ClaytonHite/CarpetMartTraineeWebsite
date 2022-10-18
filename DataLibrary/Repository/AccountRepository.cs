@@ -1,7 +1,5 @@
 ﻿using DataLibrary.DataAccessLayer;
 using DataLibrary.DTOs;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
 using System.Data;
 
 namespace DataLibrary.Repository
