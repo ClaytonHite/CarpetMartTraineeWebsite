@@ -1,9 +1,9 @@
-﻿using WebsiteProjectCMart.ViewModels;
+﻿using WebsiteProjectCarpetMart.ViewModels;
 using DataLibrary.DTOs;
 using DataLibrary.Repository;
 using WebsiteProjectCarpetMart;
 
-namespace WebsiteProjectCMart.BusinessLogic
+namespace WebsiteProjectCarpetMart.BusinessLogic
 {
 	public class AccountBL
 	{

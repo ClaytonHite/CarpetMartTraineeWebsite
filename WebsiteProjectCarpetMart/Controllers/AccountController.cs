@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebsiteProjectCMart.BusinessLogic;
-using WebsiteProjectCMart.Models;
-using WebsiteProjectCMart.ViewModels;
+using WebsiteProjectCarpetMart.BusinessLogic;
+using WebsiteProjectCarpetMart.ViewModels;
 
-namespace WebsiteProjectCMart.Controllers
+namespace WebsiteProjectCarpetMart.Controllers
 {
     public class AccountController : Controller
     {

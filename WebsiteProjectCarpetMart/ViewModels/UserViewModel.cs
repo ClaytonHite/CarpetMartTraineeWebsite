@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace WebsiteProjectCMart.ViewModels
+namespace WebsiteProjectCarpetMart.ViewModels
 {
     public class UserViewModel
     {
@@ -34,6 +34,6 @@ namespace WebsiteProjectCMart.ViewModels
         [Display(Name = "Email")]
         [Required]
         public string Email { get; set; }
-        public int Account { get; set; }
+        public int Account_Id { get; set; }
     }
 }

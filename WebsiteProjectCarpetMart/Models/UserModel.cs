@@ -1,6 +1,6 @@
-﻿namespace WebsiteProjectCMart.Models
+﻿namespace WebsiteProjectCarpetMart.Models
 {
-    public class UserModel
+    public class UserModel : IUserModel
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -12,6 +12,6 @@
         public string Zip { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int Account { get; set; }
+        public int Account_Id { get; set; }
     }
 }

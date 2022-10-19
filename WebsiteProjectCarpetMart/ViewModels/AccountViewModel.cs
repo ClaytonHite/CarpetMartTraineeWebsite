@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-
-namespace WebsiteProjectCMart.ViewModels
+﻿namespace WebsiteProjectCarpetMart.ViewModels
 {
-    public class AccountViewModel
-    {
+	public class AccountViewModel
+	{
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public int AccessRights { get; set; }
         public bool EntrySuccessfull { get; set; }
     }
 }

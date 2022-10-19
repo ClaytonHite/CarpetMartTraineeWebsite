@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebsiteProjectCMart.Controllers
+namespace WebsiteProjectCarpetMart.Controllers
 {
     public class UserController : Controller
     {

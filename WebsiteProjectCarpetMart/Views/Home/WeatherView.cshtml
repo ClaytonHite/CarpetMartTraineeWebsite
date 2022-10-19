@@ -1,0 +1,13 @@
+﻿@model WebsiteProjectCarpetMart.ViewModels.WeatherViewModel
+@{
+    ViewData["Title"] = "Current Weather";
+}
+
+<div class"text-center">
+	<h1 class="display-2">Current Weather</h1>
+</div>
+
+@foreach(var data in Model.WeatherViewModel)
+{
+	<h2>@data.Name</h2>
+}
