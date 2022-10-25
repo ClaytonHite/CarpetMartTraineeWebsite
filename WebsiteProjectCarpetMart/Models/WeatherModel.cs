@@ -1,7 +1,10 @@
-﻿namespace WebsiteProjectCarpetMart.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace WebsiteProjectCarpetMart.Models
 {
-	public class WeatherViewModel
-	{
+    public class WeatherModel
+    {
         public int index { get; set; }
         public DateTime DateTimeUpdated { get; set; }
         public string Name { get; set; }

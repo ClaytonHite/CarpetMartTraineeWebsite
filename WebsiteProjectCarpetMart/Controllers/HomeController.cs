@@ -2,12 +2,14 @@
 using Newtonsoft.Json;
 using System.Diagnostics;
 using WebsiteProjectCarpetMart.Models;
+using WebsiteProjectCarpetMart.BusinessLogic;
 using WebsiteProjectCarpetMart.ViewModels;
 
 namespace WebsiteProjectCarpetMart.Controllers
 {
     public class HomeController : Controller
     {
+        public static List<WeatherViewModel> WeatherList = new List<WeatherViewModel>();
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -26,15 +28,14 @@ namespace WebsiteProjectCarpetMart.Controllers
         }
         public async Task<IActionResult> Weather(WeatherViewModel wvm)
         {
-            if (wvm.name == null)
+            if (wvm.Name == null)
             {
 
             }
             else
             {
-                //wvm = await GetWeatherViewModel(wvm.name);
-                //return View(wvm);
-                return RedirectToAction("WeatherView", await GetWeatherViewModel(wvm.name));
+                wvm = await WeatherBL.GetWeatherViewModel(wvm.Name, WeatherList);
+                return RedirectToAction("GetWeather", wvm.index);
             }
             return View();
         }
@@ -44,23 +45,9 @@ namespace WebsiteProjectCarpetMart.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        [HttpPost]
-        static async Task<WeatherViewModel> GetWeatherViewModel(string city)
+        public IActionResult GetWeather(int index)
         {
-            WeatherViewModel wvm = new WeatherViewModel();
-            string apiKey = "710f85fcadb00029bbf5074c54cefe19";
-            string url = $"https://api.openweathermap.org/data/2.5/weather?q={city},US&appid={apiKey}";
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(url);
-                string responseBody = await response.Content.ReadAsStringAsync();
-                wvm = JsonConvert.DeserializeObject<WeatherViewModel>(responseBody);
-            }
-            return wvm;
-        }
-        public IActionResult WeatherView(WeatherViewModel wvm)
-        {
-            return View(wvm);
+            return View(WeatherList[index]);
         }
     }
 }

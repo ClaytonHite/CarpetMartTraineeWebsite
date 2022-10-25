@@ -1,0 +1,30 @@
+﻿@model WebsiteProjectCarpetMart.ViewModels.WeatherViewModel
+@{
+    ViewData["Title"] = "Current Weather";
+}
+<div class"text-center" align="center">
+	<h1 class="display">Current Weather in @Model.Name</h1>
+	<h1 class="display">You can update every 10 minutes.</h1>
+</div>
+<div class="card-columns" align="center">
+	<div class="card">
+		<div class="card-body" style="background-color:oldlace;">
+			<h5 class="card-title">
+				<div class="current-container mobile-padding">
+					<div>
+						<span style="color:#FF9966">@Model.DateTimeUpdated</span>
+						<h2 style="margin-top: 0px;">@Model.Name, US</h2>
+					</div>
+					<div>
+						<div class="current-temp">
+							<span class="heading">@Model.Temp°F</span>
+						</div>
+						<div class="bold">Feels like @Model.FeelsLike°F. @Model.SkyCondition.</div>
+					</div>
+				</div>
+			</h5>
+		</div>
+	</div>
+</div>	
+
+
