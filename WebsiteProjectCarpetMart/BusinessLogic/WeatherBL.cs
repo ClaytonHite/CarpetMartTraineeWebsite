@@ -12,7 +12,7 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
             {
                 if(weatherList[i].Name == city)
                 {
-                    if((DateTime.UtcNow - weatherList[i].DateTimeUpdated).TotalMinutes >= 1)
+                    if((DateTime.UtcNow - weatherList[i].DateTimeUpdated).TotalMinutes >= 10)
                     {
                         weatherList.Remove(weatherList[i]);
                     }
@@ -32,7 +32,7 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
                 wam = JsonConvert.DeserializeObject<WeatherAPIModel>(responseBody);                
             }
             WeatherViewModel weather = ConvertWeatherAPIModelToWeatherModel(wam);
-            weather.index = weatherList.Count - 1;
+            weather.index = weatherList.Count;
             weatherList.Add(weather);
             return weather;
         }

@@ -1,90 +1,91 @@
-﻿@model WebsiteProjectCarpetMart.ViewModels.RegisterViewModel
+﻿@model WebsiteProjectCarpetMart.ViewModels.UserViewModel
 @{
-    ViewData["Title"] = "Register Account";
+    ViewData["Title"] = "Edit Profile";
 }
-<h1>Please enter data in the required fields to register for an account.</h1>
+<h1>Please enter your contact information in the required fields.</h1>
 
 <div class="container border" style="padding:25px">
-	<form asp-action="Login">
+	<form asp-action="EditProfile">
 		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
-		<div class="form-group row">
-			<div class="col-1">
+		<div class="form-group">
+			<div class="col-3">
 				<label asp-for="FirstName" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="FirstName" asp-for="FirstName" class="form-control" />
 				<span asp-validation-for="FirstName" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="MiddleName" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="MiddleName" asp-for="MiddleName" class="form-control" />
 				<span asp-validation-for="MiddleName" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="LastName" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="LastName" asp-for="LastName" class="form-control" />
 				<span asp-validation-for="LastName" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+		</div>
+		<div class="form-group">
+			<div class="col-3">
 				<label asp-for="AddressLine1" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="AddressLine1" asp-for="AddressLine1" class="form-control" />
 				<span asp-validation-for="AddressLine1" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="AddressLine2" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="AddressLine2" asp-for="AddressLine2" class="form-control" />
 				<span asp-validation-for="AddressLine2" class="text-danger"></span>
 			</div>
-						<div class="col-1">
+			<div class="col-3">
 				<label asp-for="City" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="City" asp-for="City" class="form-control" />
 				<span asp-validation-for="City" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="State" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="State" asp-for="State" class="form-control" />
 				<span asp-validation-for="State" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="Zip" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="Zip" asp-for="Zip" class="form-control" />
 				<span asp-validation-for="Zip" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="Phone" class="control-label"></label>
 			</div>
-			<div class="col-1">
+		</div>
+		<div class="form-group">
+			<div class="col-3">
 				<input type="Phone" asp-for="Phone" class="form-control" />
 				<span asp-validation-for="Phone" class="text-danger"></span>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<label asp-for="Email" class="control-label"></label>
 			</div>
-			<div class="col-1">
+			<div class="col-3">
 				<input type="Email" asp-for="Email" class="form-control" />
 				<span asp-validation-for="Email" class="text-danger"></span>
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-1">
-				<input type="submit" class="btn btn-primary" value="Login" />
-			</div>
-			<div class="col-5">
-				<input type="submit" class="btn btn-primary" value="Register" formaction="RegisterAccount"/>
+			<div class="col-3">
+				<input type="submit" class="btn btn-primary" value="Edit Profile" />
 			</div>
 		</div>
 	</form>

@@ -9,7 +9,8 @@ namespace WebsiteProjectCarpetMart.Controllers
 {
     public class HomeController : Controller
     {
-        public static List<WeatherViewModel> WeatherList = new List<WeatherViewModel>();
+        static List<WeatherViewModel> _weatherList = new List<WeatherViewModel>();
+        static WeatherViewModel _weather;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -34,8 +35,9 @@ namespace WebsiteProjectCarpetMart.Controllers
             }
             else
             {
-                wvm = await WeatherBL.GetWeatherViewModel(wvm.Name, WeatherList);
-                return RedirectToAction("GetWeather", wvm.index);
+                wvm = await WeatherBL.GetWeatherViewModel(wvm.Name, _weatherList);
+                _weather = wvm;
+                return RedirectToAction("GetWeather");
             }
             return View();
         }
@@ -45,9 +47,9 @@ namespace WebsiteProjectCarpetMart.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult GetWeather(int index)
+        public IActionResult GetWeather()
         {
-            return View(WeatherList[index]);
+            return View(_weather);
         }
     }
 }
