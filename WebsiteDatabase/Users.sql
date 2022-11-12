@@ -11,6 +11,5 @@
     [Zip] VARCHAR(100) NULL, 
     [Phone] VARCHAR(100) NULL, 
     [Email] VARCHAR(100) NULL, 
-    [Account] INT NOT NULL, 
-    CONSTRAINT [FK_Users_ToUserAccounts] FOREIGN KEY (Account) REFERENCES [UserAccounts]([Id]) 
+    [MSId] VARCHAR(200) NULL, 
 )

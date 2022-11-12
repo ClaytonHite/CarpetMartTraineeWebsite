@@ -3,7 +3,8 @@
 	public class Config
 	{
         private static IConfiguration _configuration;
-        public static void Initialize()
+        public static string ConnectionString { get; private set; }
+        public static void Initialize(string connString)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
             _configuration = builder.Build();

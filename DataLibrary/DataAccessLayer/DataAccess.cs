@@ -18,7 +18,7 @@ namespace DataLibrary.DataAccessLayer
         {
             throw new NotImplementedException();
         }
-        public DataTable VerifyAccountViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
+        public DataTable PopulateDataTableViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
         {
             DataTable dataTable = new DataTable();
             try
@@ -56,7 +56,6 @@ namespace DataLibrary.DataAccessLayer
         public List<T> ReadDataViaStoredProcedure<T>(string storedProcName, Dictionary<string, object> parameters)
         {
             List<T> dataList = new List<T>();
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))

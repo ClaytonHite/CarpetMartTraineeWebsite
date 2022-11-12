@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WebsiteProjectCarpetMart;
 using WebsiteProjectCarpetMart.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = false;
 });
 
+var connBuilder = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json");
+IConfiguration configuration = connBuilder.Build();
+Config.Initialize(configuration.GetValue<string>("ConnectionStrings:DefaultConnection"));
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
@@ -60,7 +66,6 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

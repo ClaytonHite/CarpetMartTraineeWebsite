@@ -58,12 +58,14 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="UserAccounts.sql" />
     <Build Include="Users.sql" />
     <Build Include="ClassSchedule.sql" />
-    <Build Include="spVerifyAccount.sql" />
+    <Build Include="spCheckExistingProfile.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="WebsiteDatabase.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WebsiteDatabase.publish.xml" />
   </ItemGroup>
 </Project>
