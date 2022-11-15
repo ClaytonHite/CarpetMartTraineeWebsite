@@ -28,7 +28,12 @@
 ##### Open the packager manager console and run the command Update-Database
 
 ### Publish the WebsiteDatabase Project
-##### Right click the WebsiteDatabase Project, Click Publish..., find your connection created when you did update-database. Then in the Database name field put WebsiteDatabase
+##### Right click the WebsiteDatabase Project
+##### Click Publish...
+##### find your connection created when you did update-database
+##### Then in the Database name field put WebsiteDatabase
 
 ### Change connection string
-##### For the CarpetMartTraineeWebsite project and also the CarpetMartTraineeWebsite.Tests. Go into the appsettings.json and change the Server= on both to the one set up when you did update-database. Change the DefaultConnection Database= to the generated database from update-database AND Change the WebsiteDatabase Database= to WebsiteDatabase
+##### For the CarpetMartTraineeWebsite project and also the CarpetMartTraineeWebsite.Tests.
+##### Go into the appsettings.json and change the Server= on both to the one set up when you did update-database.
+##### Change the DefaultConnection Database= to the generated database from update-database AND Change the WebsiteDatabase Database= to WebsiteDatabase
