@@ -11,6 +11,14 @@ namespace DataLibrary.Repository
 {
     public class UserRepository
     {
+        public List<UserDTO> RegisteredUsersForClassList(string connString, string className)
+        {
+            List<UserDTO> list = new List<UserDTO>();
+            DataAccess dal = new DataAccess(connString);
+            Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
+            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spRegisteredUsersForClass", paramDictionary);
+            return ConvertDataTableToDTOList(dataTable);
+        }
         public UserDTO CheckExistingProfile(string id, string connString)
         {
             DataAccess dal = new DataAccess(connString);
@@ -96,6 +104,28 @@ namespace DataLibrary.Repository
                 uDTO.Email = row["Email"].ToString();
             }
             return uDTO;
+        }
+        public List<UserDTO> ConvertDataTableToDTOList(DataTable dataTable)
+        {
+            List<UserDTO> list = new List<UserDTO>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                UserDTO uDTO = new UserDTO();
+                uDTO.Id = Convert.ToInt32(row["Id"]);
+                uDTO.MSId = row["MSId"].ToString();
+                uDTO.FirstName = row["FirstName"].ToString();
+                uDTO.MiddleName = row["MiddleName"].ToString();
+                uDTO.LastName = row["LastName"].ToString();
+                uDTO.AddressLine1 = row["AddressLine1"].ToString();
+                uDTO.AddressLine2 = row["AddressLine2"].ToString();
+                uDTO.City = row["City"].ToString();
+                uDTO.State = row["State"].ToString();
+                uDTO.Zip = row["Zip"].ToString();
+                uDTO.Phone = row["Phone"].ToString();
+                uDTO.Email = row["Email"].ToString();
+                list.Add(uDTO);
+            }
+            return list;
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace WebsiteProjectCarpetMart.Models
 {
-    public class Classes
+    public class ClassModel
     {
+        public int ClassId { get; set; }
         public string ClassName { get; set; }
         public string ClassStartDate { get; set; }
         public string ClassEndDate { get; set; }
