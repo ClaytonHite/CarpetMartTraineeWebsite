@@ -10,13 +10,31 @@ namespace DataLibrary.DataAccessLayer
         {
             _connectionString = connectionString;
         }
-        public void CreateDataViaStoredProcedure<T>(string storedProcName, Dictionary<string, object> parameters)
+        public object DeleteDataViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
         {
-            throw new NotImplementedException();
-        }
-        public void DeleteDataViaStoredProcedure<T>(string storedProcName, Dictionary<string, object> parameters)
-        {
-            throw new NotImplementedException();
+            object data = new object();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(storedProcName, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    foreach (var parameter in parameters)
+                    {
+                        command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                    }
+                    data = command.ExecuteScalar;
+
+                    connection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return data;
         }
         public DataTable PopulateDataTableViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
         {
@@ -42,13 +60,6 @@ namespace DataLibrary.DataAccessLayer
             }
             catch (Exception)
             {
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
-                Console.WriteLine("ERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR\nERROR ERROR");
                 throw;
             }
             return dataTable;

@@ -1,0 +1,77 @@
+﻿@model WebsiteProjectCarpetMart.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    @{
+        if (Model.FirstName == null)
+        {
+            <link rel="stylesheet" href="style.css">
+            <h1 class="pageheader">You haven't added a profile yet!</h1>
+            <div class="form-group">
+			<div class="row-col-1">
+            <a href="/Account/AddProfile" class="btn btn-primary">Add Profile</a>
+			</div>
+		</div>
+        }
+        else
+        {
+            <div class="card-body">
+                <div class="card-title">Name</div>
+                <div class="card-text">@Model.LastName, @Model.FirstName @Model.MiddleName</div>
+            </div>
+            <br />
+            <div class="card-body">
+                <div class="card-title">Address</div>
+                <div class="card-text">@Model.AddressLine1</div>
+                @{if(@Model.AddressLine2 != null)
+                {
+                <div class="card-text">@Model.AddressLine2</div>
+                }
+                }
+                <div class="card-text">@Model.City, @Model.State @Model.Zip</div>
+            </div>
+            <br />
+            <div class="card-body">
+                <div class="card-title">Phone Number</div>
+                <div class="card-text">@Model.Phone</div>
+            </div>
+            <br />
+            <div class="card-body">
+                <div class="card-title">E-Mail</div>
+                <div class="card-text">@Model.Email</div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row-col-1">
+                    <a href="/Account/EditProfile" class="btn btn-primary">Edit Profile</a>
+                    <input type="submit" class="btn btn-danger" value="DELETE" formaction="DeleteProfile" />
+                </div>
+            </div>
+        }
+    }
+    <style>
+        .card-body{
+            border-radius: 20px;
+            background-color:lightgray;
+        }
+        .card-title {
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            border-radius: 2px;
+        }
+        .card-text{
+            text-align: center;
+            color: black;
+            border-radius: 2px;
+        }
+        }
+    </style>
+</body>
+</html>
