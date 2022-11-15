@@ -1,7 +1,7 @@
 # CarpetMartTraineeWebsite
 ##### This is my project for Software Development Course 2. The project originated by talking with a company I have worked for in the past. The goal is to make a website for the company that will let people register so they can sign up for trainings to become a flooring installer.
 
-##Features
+## Features
 
 ### Create 3 or more unit tests for your application
 ##### In the solution, under the project WebsiteProject.Tests, I have created 4 unit tests to verify the CRUD operation of making a profile works.
