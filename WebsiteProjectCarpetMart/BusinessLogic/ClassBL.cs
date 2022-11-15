@@ -1,5 +1,9 @@
-﻿using DataLibrary.DTOs;
+﻿using DataLibrary.DataAccessLayer;
+using DataLibrary.DTOs;
 using DataLibrary.Repository;
+using System.Collections.Generic;
+using System.Data;
+using System.Xml.Linq;
 using WebsiteProjectCarpetMart.Models;
 using WebsiteProjectCarpetMart.ViewModels;
 
@@ -7,6 +11,20 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
 {
     public class ClassBL
     {
+        public List<ClassViewModel> ClassList()
+        {
+            string connString = Config.GetConnectionString("WebsiteDatabase");
+            List<ClassViewModel> list = new List<ClassViewModel>();
+            ClassRepository classRepository = new ClassRepository();
+            List<ClassDTO> classDTOList = classRepository.ClassList(connString);
+            for (int i = 0; i < classDTOList.Count; i++)
+            {
+                ClassModel cM = ConvertDTOToModel(classDTOList[i]);
+                ClassViewModel cVM = ConvertModelToViewModel(cM);
+                list.Add(cVM);
+            }
+            return list;
+        }
         public ClassViewModel CheckExistingClass(string name)
         {
             string connString = Config.GetConnectionString("WebsiteDatabase");
