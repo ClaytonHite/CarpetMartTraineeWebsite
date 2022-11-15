@@ -1,14 +1,7 @@
-﻿using System;
-using Xunit;
-using WebsiteProjectCarpetMart.ViewModels;
-using WebsiteProjectCarpetMart.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using WebsiteProjectCarpetMart.BusinessLogic;
-using System.Security.Claims;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using WebsiteProjectCarpetMart;
+using WebsiteProjectCarpetMart.BusinessLogic;
+using WebsiteProjectCarpetMart.ViewModels;
 
 namespace WebsiteProject.Tests
 {
@@ -69,7 +62,7 @@ namespace WebsiteProject.Tests
             userTest.City = "Louisville";
             userTest.State = "KY";
             userTest.Zip = "40203";
-            userTest.Phone = "1 (888) 867-5309";
+            userTest.Phone = "1 (502) 867-5309";
             userTest.Email = "Bob.Smith@gmail.com";
 
             UserViewModel userResult = new UserViewModel();
