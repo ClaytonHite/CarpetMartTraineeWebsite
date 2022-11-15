@@ -74,7 +74,6 @@ namespace DataLibrary.Repository
             DataAccess dal = new DataAccess(connString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("MSId", MSId);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spUpdateUserProfile", paramDictionary);
             return Convert.ToInt32(dal.DeleteDataViaStoredProcedure("spDeleteUserProfile", paramDictionary));
         }
 

@@ -12,21 +12,22 @@ namespace DataLibrary.DataAccessLayer
         }
         public object DeleteDataViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
         {
-            object data = new object();
+            object data;
             try
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, connection);
-                    command.CommandType = CommandType.StoredProcedure;
 
-                    foreach (var parameter in parameters)
+                    using (SqlCommand command = new SqlCommand(storedProcName, connection))
                     {
-                        command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                        command.CommandType = CommandType.StoredProcedure;
+                        foreach (var parameter in parameters)
+                        {
+                            command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                        }
+                        data = command.ExecuteScalar();
                     }
-                    data = command.ExecuteScalar;
-
                     connection.Close();
                 }
             }

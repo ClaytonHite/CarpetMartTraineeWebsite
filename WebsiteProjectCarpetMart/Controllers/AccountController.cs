@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebsiteProjectCarpetMart.BusinessLogic;
 using WebsiteProjectCarpetMart.ViewModels;
+
 namespace WebsiteProjectCarpetMart.Controllers
 {
     public class AccountController : Controller
@@ -17,9 +18,10 @@ namespace WebsiteProjectCarpetMart.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserBL userBL = new UserBL();
             _uvm = userBL.CheckExistingProfile(userId);
-            if(uvm.FirstName == null || uvm.MiddleName == null || uvm.LastName == null || uvm.AddressLine1 == null)
+            if(uvm.FirstName == null || uvm.MiddleName == null || uvm.LastName == null || uvm.AddressLine1 == null ||
+                uvm.City == null || uvm.State == null || uvm.Phone == null || uvm.Email == null)
             {
-                return View(_uvm);
+                return View(uvm);
             }
             if(_uvm.Account_Id > 0)
             {
@@ -47,6 +49,11 @@ namespace WebsiteProjectCarpetMart.Controllers
 			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 			UserBL userBL = new UserBL();
 			_uvm = userBL.CheckExistingProfile(userId);
+            if (uvm.FirstName == null || uvm.MiddleName == null || uvm.LastName == null || uvm.AddressLine1 == null ||
+                uvm.City == null || uvm.State == null || uvm.Phone == null || uvm.Email == null)
+            {
+                return RedirectToAction("EditProfile", uvm);
+            }
             _uvm = userBL.UpdateUserProfile(uvm, userId);
 
             return RedirectToAction("Profile", _uvm);
@@ -56,7 +63,6 @@ namespace WebsiteProjectCarpetMart.Controllers
             int result;
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserBL userBL = new UserBL();
-            _uvm = userBL.CheckExistingProfile(userId);
             result = userBL.DeleteProfile(userId);
             if(result == 0)
             {
