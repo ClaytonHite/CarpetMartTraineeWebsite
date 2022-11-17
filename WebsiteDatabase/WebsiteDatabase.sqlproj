@@ -64,6 +64,11 @@
     <Build Include="spAddUserProfile.sql" />
     <Build Include="spUpdateUserProfile.sql" />
     <Build Include="spDeleteUserProfile.sql" />
+    <Build Include="spClassList.sql" />
+    <Build Include="spCreateClass.sql" />
+    <Build Include="TraineesRegisteredForClasses.sql" />
+    <Build Include="spRegisterForClass.sql" />
+    <Build Include="spGetListOfTraineesForClasses.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="WebsiteDatabase.refactorlog" />

@@ -1,12 +1,14 @@
+using DataLibrary.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebsiteProjectCarpetMart;
+using WebsiteProjectCarpetMart.BusinessLogic;
 using WebsiteProjectCarpetMart.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("WebsiteDatabase");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -16,6 +18,22 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
 builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
+
+builder.Services.AddTransient<UserBL>();
+builder.Services.AddTransient<IUserRepository>(options =>
+{
+    return new UserRepository(connectionString);
+});
+builder.Services.AddTransient<ClassBL>();
+builder.Services.AddTransient<IClassRepository>(options =>
+{
+    return new ClassRepository(connectionString);
+});
+builder.Services.AddTransient<RegisteredClassesBL>();
+builder.Services.AddTransient<IRegisteredClassesRepository>(options =>
+{
+    return new RegisteredClassesRepository(connectionString);
+});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

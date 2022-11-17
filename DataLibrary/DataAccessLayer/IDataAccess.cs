@@ -9,7 +9,7 @@ namespace DataLibrary.DataAccessLayer
 {
     public interface IDataAccess
     {
-        void UpdateDataViaStoredProcedure<T>(string storedProcName, Dictionary<string, object> parameters);
+        object UpdateDataViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters);
         object DeleteDataViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters);
         DataTable PopulateDataTableViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters);
     }

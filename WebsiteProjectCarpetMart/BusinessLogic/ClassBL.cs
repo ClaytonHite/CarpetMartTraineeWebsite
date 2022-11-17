@@ -11,12 +11,15 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
 {
     public class ClassBL
     {
+        private IClassRepository _classRepository;
+        public ClassBL(IClassRepository classRepository)
+        {
+            _classRepository = classRepository;
+        }
         public List<ClassViewModel> ClassList()
         {
-            string connString = Config.GetConnectionString("WebsiteDatabase");
             List<ClassViewModel> list = new List<ClassViewModel>();
-            ClassRepository classRepository = new ClassRepository();
-            List<ClassDTO> classDTOList = classRepository.ClassList(connString);
+            List<ClassDTO> classDTOList = _classRepository.ClassList();
             for (int i = 0; i < classDTOList.Count; i++)
             {
                 ClassModel cM = ConvertDTOToModel(classDTOList[i]);
@@ -25,11 +28,13 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
             }
             return list;
         }
+        public string RegisterForClass(string className, string MSId)
+        {
+            return _classRepository.RegisterForClass(className, MSId);
+        }
         public ClassViewModel CheckExistingClass(string name)
         {
-            string connString = Config.GetConnectionString("WebsiteDatabase");
-            ClassRepository classRepository = new ClassRepository();
-            ClassDTO classDTO = classRepository.ReadClass(name, connString);
+            ClassDTO classDTO = _classRepository.ReadClass(name);
             ClassModel classModel = ConvertDTOToModel(classDTO);
             return ConvertModelToViewModel(classModel);
         }
@@ -37,25 +42,19 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
         {
             ClassModel cM = ConvertViewModelToModel(cVM);
             ClassDTO classDTO = ConvertModelToDTO(cM);
-            string connString = Config.GetConnectionString("WebsiteDatabase");
-            ClassRepository classRepository = new ClassRepository();
-            cM = ConvertDTOToModel(classRepository.AddClass(classDTO, connString));
+            cM = ConvertDTOToModel(_classRepository.AddClass(classDTO));
             return ConvertModelToViewModel(cM);
         }
         public ClassViewModel UpdateClass(ClassViewModel cVm)
         {
             ClassModel cM = ConvertViewModelToModel(cVm);
             ClassDTO ClassDTO = ConvertModelToDTO(cM);
-            string connString = Config.GetConnectionString("WebsiteDatabase");
-            ClassRepository ClassRepository = new ClassRepository();
-            cM = ConvertDTOToModel(ClassRepository.UpdateClass(ClassDTO, connString));
+            cM = ConvertDTOToModel(_classRepository.UpdateClass(ClassDTO));
             return ConvertModelToViewModel(cM);
         }
         public int DeleteClass(string className)
         {
-            string connString = Config.GetConnectionString("WebsiteDatabase");
-            ClassRepository ClassRepository = new ClassRepository();
-            return ClassRepository.DeleteClass(className, connString);
+            return _classRepository.DeleteClass(className);
         }
         public ClassModel ConvertViewModelToModel(ClassViewModel cVm)
         {

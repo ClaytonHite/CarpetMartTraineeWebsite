@@ -1,0 +1,55 @@
+﻿@model WebsiteProjectCarpetMart.ViewModels.RegisteredClassesViewModel
+@{
+    ViewData["Title"] = "Class List";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 50px 0;
+        }
+
+        td {
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    @{
+        if (Model.UserViewModelList.Count == 0)
+        {
+            <link rel="stylesheet" href="style.css">
+            <h1 class="pageheader">No one is registered yet!</h1>
+        }
+        else
+        {
+            <h2>Students Registered for @Model.ClassViewModel.ClassName.</h2>
+            <br />
+            <br />
+            <div style="overflow-x: auto;">
+                <table>
+                    <tr>
+                        <th> First Name </th>
+                        <th> Middle Name </th>
+                        <th> Last Name </th>
+                        <th> Phone Number </th>
+                        <th> Email </th>
+                    </tr>
+                    @foreach (var user in Model.UserViewModelList)
+                    {
+                        <tr>
+                            <td>@user.FirstName</td>
+                            <td>@user.MiddleName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Phone</td>
+                            <td>@user.Email</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+    }
+</body>
+</html>

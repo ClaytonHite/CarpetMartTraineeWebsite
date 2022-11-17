@@ -10,27 +10,32 @@ using System.Xml.Linq;
 
 namespace DataLibrary.Repository
 {
-    public class ClassRepository
+    public class ClassRepository : IClassRepository
     {
-        public List<ClassDTO> ClassList(string connString)
+        private string _connectionString;
+        public ClassRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+        public List<ClassDTO> ClassList()
         {
             List<ClassDTO> list = new List<ClassDTO>();
-            DataAccess dal = new DataAccess(connString);
+            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spClassList", paramDictionary);
             return ConvertDataTableToDTOList(dataTable);
         }
-        public ClassDTO ReadClass(string name, string connString)
+        public ClassDTO ReadClass(string name)
         {
-            DataAccess dal = new DataAccess(connString);
+            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", name);
             DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spReadClass", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
-        public ClassDTO AddClass(ClassDTO addClass, string connString)
+        public ClassDTO AddClass(ClassDTO addClass)
         {
-            DataAccess dal = new DataAccess(connString);
+            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", addClass.ClassName);
             paramDictionary.Add("ClassStartDate", addClass.ClassStartDate);
@@ -43,9 +48,9 @@ namespace DataLibrary.Repository
             DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spCreateClass", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
-        public ClassDTO UpdateClass(ClassDTO updateClass, string connString)
+        public ClassDTO UpdateClass(ClassDTO updateClass)
         {
-            DataAccess dal = new DataAccess(connString);
+            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", updateClass.ClassName);
             paramDictionary.Add("ClassStartDate", updateClass.ClassStartDate);
@@ -58,12 +63,21 @@ namespace DataLibrary.Repository
             DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spUpdateClass", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
-        public int DeleteClass(string className, string connString)
+        public int DeleteClass(string className)
         {
-            DataAccess dal = new DataAccess(connString);
+            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", className);
             return Convert.ToInt32(dal.DeleteDataViaStoredProcedure("spDeleteClass", paramDictionary));
+        }
+        public string RegisterForClass(string className, string MSId)
+        {
+            DataAccess dal = new DataAccess(_connectionString);
+            Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
+            paramDictionary.Add("ClassName", className);
+            paramDictionary.Add("MSId", MSId);
+            object result = dal.UpdateDataViaStoredProcedure("spRegisterForClass", paramDictionary);
+            return className;
         }
         public ClassDTO ConvertDataTableToDTO(DataTable dataTable)
         {
@@ -88,7 +102,7 @@ namespace DataLibrary.Repository
             foreach (DataRow row in dataTable.Rows)
             {
                 ClassDTO classDTO = new ClassDTO();
-                classDTO.ClassId = Convert.ToInt32(row["ClassId"]);
+                classDTO.ClassId = Convert.ToInt32(row["Id"]);
                 classDTO.ClassName = row["ClassName"].ToString();
                 classDTO.ClassStartDate = row["ClassStartDate"].ToString();
                 classDTO.ClassEndDate = row["ClassEndDate"].ToString();

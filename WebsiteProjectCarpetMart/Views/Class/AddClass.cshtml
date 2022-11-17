@@ -1,0 +1,83 @@
+﻿@model WebsiteProjectCarpetMart.ViewModels.ClassViewModel
+@{
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Class</title>
+</head>
+<body>
+    <div class="container border" style="padding:25px">
+	<form asp-action="AddClass" method="post">
+		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+		<div class="form-group">
+			<div class="col-3">
+			<label asp-for="ClassName" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassName" asp-for="ClassName" class="form-control" />
+				<span asp-validation-for="ClassName" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassStartDate" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassStartDate" asp-for="ClassStartDate" class="form-control" />
+				<span asp-validation-for="ClassStartDate" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassEndDate" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+			<input type="ClassEndDate" asp-for="ClassEndDate" class="form-control" />
+				<span asp-validation-for="ClassEndDate" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassStartTime" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassStartTime" asp-for="ClassStartTime" class="form-control" />
+				<span asp-validation-for="ClassStartTime" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassEndTime" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassEndTime" asp-for="ClassEndTime" class="form-control" />
+				<span asp-validation-for="ClassEndTime" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassInformation" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassInformation" asp-for="ClassInformation" class="form-control" />
+				<span asp-validation-for="ClassInformation" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassHost" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassHost" asp-for="ClassHost" class="form-control" />
+				<span asp-validation-for="ClassHost" class="text-danger"></span>
+			</div>
+			<div class="col-3">
+				<label asp-for="ClassAddress" class="control-label"></label>
+			</div>
+			<div class="row-cols-6">
+				<input type="ClassAddress" asp-for="ClassAddress" class="form-control" />
+				<span asp-validation-for="ClassAddress" class="text-danger"></span>
+			</div>
+		</div>
+		<br />
+		<div class="form-group">
+			<div class="row-col-1">
+				<input type="submit" class="btn btn-primary" value="Add Profile" />
+				<input type="submit" class="btn btn-danger" value="DELETE" formaction="Delete" />
+			</div>
+		</div>
+	</form>
+</div>
+</body>
+</html>

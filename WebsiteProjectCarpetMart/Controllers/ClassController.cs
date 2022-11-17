@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataLibrary.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 using System.Security.Claims;
 using WebsiteProjectCarpetMart.BusinessLogic;
 using WebsiteProjectCarpetMart.ViewModels;
@@ -8,32 +10,47 @@ namespace WebsiteProjectCarpetMart.Controllers
 {
     public class ClassController : Controller
     {
+        private ClassBL _classBL;
+        private RegisteredClassesBL _registeredClassesBL;
+        public ClassController(ClassBL classBL, RegisteredClassesBL registeredClassesBL)
+        {
+            _classBL = classBL;
+            _registeredClassesBL = registeredClassesBL;
+        }
         public IActionResult ClassList()
         {
-            ClassBL classBL = new ClassBL();
-            List<ClassViewModel> cVMList = classBL.ClassList();
-            return View(cVMList);
+            List<ClassViewModel> rCVMList = _classBL.ClassList();
+            return View(rCVMList);
         }
-
-        // GET: ClassController/Create
-        public ActionResult Create()
+        public IActionResult AddClass(ClassViewModel cVM)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                cVM = _classBL.AddClass(cVM);
+                return RedirectToAction("ClassList");
+            }
+            return View(cVM);
         }
-
-        // POST: ClassController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult RegisterForClass(string className)
         {
-            try
+            className = _classBL.RegisterForClass(className, User.FindFirstValue(ClaimTypes.NameIdentifier));
+            ClassViewModel cVM = new ClassViewModel();
+            cVM.ClassName = className;
+            return View(cVM);
+        }
+        public IActionResult ViewRegisteredTraineesByClass(string className)
+        {
+            List<RegisteredClassesViewModel> rCVMList = _registeredClassesBL.GetListOfTraineesForClass(className);
+            for (int i = 0; i < rCVMList.Count; i++)
             {
-                return RedirectToAction(nameof(Index));
+                if (rCVMList[i].ClassViewModel.ClassName == className)
+                {
+                    return View(rCVMList[i]);
+                }
             }
-            catch
-            {
-                return View();
-            }
+            RegisteredClassesViewModel rCVM = new RegisteredClassesViewModel();
+            rCVM.UserViewModelList = new List<UserViewModel>();
+            return View(rCVM);
         }
     }
 }

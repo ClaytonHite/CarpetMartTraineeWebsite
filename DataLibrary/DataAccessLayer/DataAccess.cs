@@ -105,9 +105,32 @@ namespace DataLibrary.DataAccessLayer
             return dataList;
         }
 
-        public void UpdateDataViaStoredProcedure<T>(string storedProcName, Dictionary<string, object> parameters)
+        public object UpdateDataViaStoredProcedure(string storedProcName, Dictionary<string, object> parameters)
         {
-            throw new NotImplementedException();
+            object data;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(storedProcName, connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        foreach (var parameter in parameters)
+                        {
+                            command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+                        }
+                        data = command.ExecuteScalar();
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return data;
         }
     }
 }

@@ -8,11 +8,14 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
 {
     public class UserBL
     {
+        private IUserRepository _userRepository;
+        public UserBL(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public UserViewModel CheckExistingProfile(string id)
         {
-            string connString = Config.GetConnectionString("WebsiteDatabase");
-            UserRepository userRepository = new UserRepository();
-            UserDTO userDTO = userRepository.CheckExistingProfile(id, connString);
+            UserDTO userDTO = _userRepository.CheckExistingProfile(id);
             UserModel userModel = ConvertDTOToModel(userDTO);
             return ConvertModelToViewModel(userModel);
         }
@@ -21,9 +24,7 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
             UserModel uM = ConvertViewModelToModel(uvm);
 			UserDTO userDTO = ConvertModelToDTO(uM);
             userDTO.MSId = MSId;
-			string connString = Config.GetConnectionString("WebsiteDatabase");
-			UserRepository userRepository = new UserRepository();
-            userDTO = userRepository.AddUserProfile(userDTO, connString);
+            userDTO = _userRepository.AddUserProfile(userDTO);
 			return uvm;
         }
 		public UserViewModel UpdateUserProfile(UserViewModel uvm, string MSId)
@@ -31,16 +32,12 @@ namespace WebsiteProjectCarpetMart.BusinessLogic
 			UserModel uM = ConvertViewModelToModel(uvm);
 			UserDTO userDTO = ConvertModelToDTO(uM);
 			userDTO.MSId = MSId;
-			string connString = Config.GetConnectionString("WebsiteDatabase");
-			UserRepository userRepository = new UserRepository();
-			userDTO = userRepository.UpdateUserProfile(userDTO, connString);
+			userDTO = _userRepository.UpdateUserProfile(userDTO);
 			return uvm;
 		}
         public int DeleteProfile(string MSId)
         {
-            string connString = Config.GetConnectionString("WebsiteDatabase");
-            UserRepository userRepository = new UserRepository();
-            return userRepository.DeleteProfile(MSId, connString);
+            return _userRepository.DeleteProfile(MSId);
         }
         public UserModel ConvertViewModelToModel(UserViewModel uvm)
         {
