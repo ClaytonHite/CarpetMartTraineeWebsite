@@ -13,7 +13,7 @@
 ##### In the solution, under the project WebsiteDatabase, I have created stored procedures to be used for communicating with the database under the specific conditions.
 
 ### Have 2 or more tables (entities) in your application that are related and have a function return data from both entities.  In entity framework, this is equivalent to a join
-##### When getting the classes a user has signed up for the user id is stored in the class table and is joined and returns the users that have signed up for the class.
+##### When getting the class a user has signed up for the user id and class id is stored in a seperate table and all 3 are joined and returns the users that have signed up for the class.
 
 ## Extras
 
