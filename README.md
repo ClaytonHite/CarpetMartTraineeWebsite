@@ -7,7 +7,7 @@
 ##### In the solution, under the project WebsiteProject.Tests, I have created 4 unit tests to verify the CRUD operation of making a profile works.
 
 ### Create a dictionary or list, populate it with several values, retrieve at least one value, and use it in your program
-##### In the UserRepository class, the methods initalize dictionary parameters to be used in the DataAcess class when communicating with the database.
+##### In the UserRepository class, the methods initalize dictionary parameters to be used in the DataAccess class when communicating with the database.
 
 ### Query your database using a raw SQL query, not EF
 ##### In the solution, under the project WebsiteDatabase, I have created stored procedures to be used for communicating with the database under the specific conditions.
