@@ -36,7 +36,7 @@
 ### Change connection string
 ##### For the CarpetMartTraineeWebsite project and also the CarpetMartTraineeWebsite.Tests.
 ##### Go into the appsettings.json and change the Server= on both to the one set up when you did update-database.
-##### Change the DefaultConnection Database= to the generated database from update-database AND Change the WebsiteDatabase Database= to WebsiteDatabase
+##### Change the DefaultConnection Database= to the generated database from update-database (if its not already in there) AND Change the WebsiteDatabase Database= to WebsiteDatabase
 
 ### Register an account
 ##### Now that the DB is setup you can run the project and click register in the top right.
