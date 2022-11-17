@@ -37,3 +37,18 @@
 ##### For the CarpetMartTraineeWebsite project and also the CarpetMartTraineeWebsite.Tests.
 ##### Go into the appsettings.json and change the Server= on both to the one set up when you did update-database.
 ##### Change the DefaultConnection Database= to the generated database from update-database AND Change the WebsiteDatabase Database= to WebsiteDatabase
+
+### Register an account
+##### Now that the DB is setup you can run the project and click register in the top right.
+##### Verify your account by clicking the link on the next page
+##### Goto the profile navigation item in the top right and add a test profile. Everything but Address Line 2 is needed
+##### Then you can goto classes and Add a new class.
+##### Go back to classes and you can see it added in and you can register to it.
+##### Then if you go back to classes you can view the users signed up for it.
+##### If you make another account, then add profile, and then sign up for the same class you can check the list and watch the different test accounts register.
+##### You can also make another class and repeat the process
+
+### Weather tab
+##### When logged in you can search the weather by city name in the US. It'll update every 10 minutes.
+# Thank You!
+##### Thanks for taking the time to look at my project if you have any questions feel free to message me on slack!
