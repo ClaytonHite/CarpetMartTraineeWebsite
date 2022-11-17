@@ -24,6 +24,9 @@
 ##### You have to register first and then currently you can click the verify link since I did not set up an email sender. You then login into the account you made. When logged in you can CRUD a profile that gets stored in the DB and Check the weather.
 
 ## Instructions for running
+### SSMS
+##### SSMS or something similar should be used to create the database, I used SQL Server Management Studio when developing this project. Which can be found at the link below.
+##### https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
 ### Update-Database
 ##### Open the package manager console and run the command Update-Database
 
