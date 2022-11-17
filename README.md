@@ -25,12 +25,12 @@
 
 ## Instructions for running
 ### Update-Database
-##### Open the packager manager console and run the command Update-Database
+##### Open the package manager console and run the command Update-Database
 
 ### Publish the WebsiteDatabase Project
 ##### Right click the WebsiteDatabase Project
 ##### Click Publish...
-##### find your connection created when you did update-database
+##### In Target database connection field, find your connection created when you did update-database
 ##### Then in the Database name field put WebsiteDatabase
 
 ### Change connection string
