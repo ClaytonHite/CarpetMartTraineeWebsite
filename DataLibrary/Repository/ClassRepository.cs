@@ -12,30 +12,28 @@ namespace DataLibrary.Repository
 {
     public class ClassRepository : IClassRepository
     {
-        private string _connectionString;
-        public ClassRepository(string connectionString)
+        private IDataAccess _dataAccess;
+        public ClassRepository(IDataAccess dataAccess)
         {
-            _connectionString = connectionString;
+            _dataAccess = dataAccess;
         }
         public List<ClassDTO> ClassList()
         {
             List<ClassDTO> list = new List<ClassDTO>();
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spClassList", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spClassList", paramDictionary);
             return ConvertDataTableToDTOList(dataTable);
         }
         public ClassDTO ReadClass(string name)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", name);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spReadClass", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spReadClass", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public ClassDTO AddClass(ClassDTO addClass)
         {
-            DataAccess dal = new DataAccess(_connectionString);
+
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", addClass.ClassName);
             paramDictionary.Add("ClassStartDate", addClass.ClassStartDate);
@@ -45,12 +43,11 @@ namespace DataLibrary.Repository
             paramDictionary.Add("ClassInformation", addClass.ClassInformation);
             paramDictionary.Add("ClassHost", addClass.ClassHost);
             paramDictionary.Add("ClassAddress", addClass.ClassAddress);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spCreateClass", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spCreateClass", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public ClassDTO UpdateClass(ClassDTO updateClass)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", updateClass.ClassName);
             paramDictionary.Add("ClassStartDate", updateClass.ClassStartDate);
@@ -60,23 +57,21 @@ namespace DataLibrary.Repository
             paramDictionary.Add("ClassInformation", updateClass.ClassInformation);
             paramDictionary.Add("ClassHost", updateClass.ClassHost);
             paramDictionary.Add("ClassAddress", updateClass.ClassAddress);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spUpdateClass", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spUpdateClass", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public int DeleteClass(string className)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", className);
-            return Convert.ToInt32(dal.DeleteDataViaStoredProcedure("spDeleteClass", paramDictionary));
+            return Convert.ToInt32(_dataAccess.DeleteDataViaStoredProcedure("spDeleteClass", paramDictionary));
         }
         public string RegisterForClass(string className, string MSId)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", className);
             paramDictionary.Add("MSId", MSId);
-            object result = dal.UpdateDataViaStoredProcedure("spRegisterForClass", paramDictionary);
+            object result = _dataAccess.UpdateDataViaStoredProcedure("spRegisterForClass", paramDictionary);
             return className;
         }
         public ClassDTO ConvertDataTableToDTO(DataTable dataTable)

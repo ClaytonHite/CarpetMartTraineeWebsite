@@ -1,3 +1,4 @@
+using DataLibrary.DataAccessLayer;
 using DataLibrary.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,17 +23,17 @@ builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerial
 builder.Services.AddTransient<UserBL>();
 builder.Services.AddTransient<IUserRepository>(options =>
 {
-    return new UserRepository(connectionString);
+    return new UserRepository(new DataAccess(connectionString));
 });
 builder.Services.AddTransient<ClassBL>();
 builder.Services.AddTransient<IClassRepository>(options =>
 {
-    return new ClassRepository(connectionString);
+    return new ClassRepository(new DataAccess(connectionString));
 });
 builder.Services.AddTransient<RegisteredClassesBL>();
 builder.Services.AddTransient<IRegisteredClassesRepository>(options =>
 {
-    return new RegisteredClassesRepository(connectionString);
+    return new RegisteredClassesRepository(new DataAccess(connectionString));
 });
 
 builder.Services.Configure<IdentityOptions>(options =>

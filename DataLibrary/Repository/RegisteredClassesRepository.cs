@@ -12,18 +12,17 @@ namespace DataLibrary.Repository
 {
     public class RegisteredClassesRepository : IRegisteredClassesRepository
     {
-        private string _connectionString;
-        public RegisteredClassesRepository(string connectionString)
+        private IDataAccess _dataAccess;
+        public RegisteredClassesRepository(IDataAccess dataAccess)
         {
-            _connectionString = connectionString;
+            _dataAccess = dataAccess;
         }
 
         public List<RegisteredClassesDTO> GetListOfTraineesForClass(string className)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("ClassName", className);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spGetListOfTraineesForClasses", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spGetListOfTraineesForClasses", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public List<RegisteredClassesDTO> ConvertDataTableToDTO(DataTable dataTable)

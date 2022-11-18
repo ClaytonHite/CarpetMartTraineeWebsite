@@ -11,22 +11,20 @@ namespace DataLibrary.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private string _connectionString;
-        public UserRepository(string connectionString)
+        private IDataAccess _dataAccess;
+        public UserRepository(IDataAccess dataAccess)
         {
-            _connectionString = connectionString;
+            _dataAccess = dataAccess;
         }
         public UserDTO CheckExistingProfile(string id)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("MSId", id);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spCheckExistingProfile", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spCheckExistingProfile", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public UserDTO AddUserProfile(UserDTO user)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("MSId", user.MSId);
             paramDictionary.Add("FirstName", user.FirstName);
@@ -46,12 +44,11 @@ namespace DataLibrary.Repository
             paramDictionary.Add("Zip", user.Zip);
             paramDictionary.Add("Phone", user.Phone);
             paramDictionary.Add("Email", user.Email);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spAddUserProfile", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spAddUserProfile", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public UserDTO UpdateUserProfile(UserDTO user)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("MSId", user.MSId);
             paramDictionary.Add("FirstName", user.FirstName);
@@ -71,15 +68,14 @@ namespace DataLibrary.Repository
             paramDictionary.Add("Zip", user.Zip);
             paramDictionary.Add("Phone", user.Phone);
             paramDictionary.Add("Email", user.Email);
-            DataTable dataTable = dal.PopulateDataTableViaStoredProcedure("spUpdateUserProfile", paramDictionary);
+            DataTable dataTable = _dataAccess.PopulateDataTableViaStoredProcedure("spUpdateUserProfile", paramDictionary);
             return ConvertDataTableToDTO(dataTable);
         }
         public int DeleteProfile(string MSId)
         {
-            DataAccess dal = new DataAccess(_connectionString);
             Dictionary<string, object> paramDictionary = new Dictionary<string, object>();
             paramDictionary.Add("MSId", MSId);
-            return Convert.ToInt32(dal.DeleteDataViaStoredProcedure("spDeleteUserProfile", paramDictionary));
+            return Convert.ToInt32(_dataAccess.DeleteDataViaStoredProcedure("spDeleteUserProfile", paramDictionary));
         }
 
         public UserDTO ConvertDataTableToDTO(DataTable dataTable)
